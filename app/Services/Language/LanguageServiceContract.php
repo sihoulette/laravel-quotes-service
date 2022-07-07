@@ -1,11 +1,4 @@
 <?php
-declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Sihoulette
- * Date: 07.07.2022
- * Time: 16:23
- */
 
 namespace App\Services\Language;
 
