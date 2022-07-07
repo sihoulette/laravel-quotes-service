@@ -15,7 +15,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localizationRedirect']
+], function () {
     Route::get('/', function () {
         return view('welcome');
     });
