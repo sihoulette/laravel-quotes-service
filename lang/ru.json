@@ -2,5 +2,6 @@
     "layout.dropdown.login": "Войти",
     "layout.dropdown.register": "Регистрация",
     "layout.dropdown.posts": "Ваши цитаты",
-    "layout.dropdown.logout": "Выйти"
+    "layout.dropdown.logout": "Выйти",
+    "home.title": "Главная страница"
 }

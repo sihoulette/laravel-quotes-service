@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localizationRedirect']
 ], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    # Home route
+    Route::get('/', [Controllers\HomeController::class, 'index']);
 });
+
