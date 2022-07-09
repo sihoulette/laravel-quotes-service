@@ -16,6 +16,11 @@ use App\Services\Language\LanguageServiceContract;
 final class LanguagesTableSeeder extends Seeder
 {
     /**
+     * @var string $table
+     */
+    private string $table = 'languages';
+
+    /**
      * Insert locales to table
      */
     private const LOCALES = LanguageServiceContract::DEFAULT_LOCALES;
@@ -37,13 +42,14 @@ final class LanguagesTableSeeder extends Seeder
         foreach ($supportLocales as $locale => $language) {
             $data['locale'] = $locale;
             $data['name'] = $language['name'];
+            $data['native'] = $language['native'];
             $data['regional'] = $language['regional'];
             $data['default'] = (int)($locale === self::DEFAULT_LOCALE);
             $data['position'] = $orderPosition;
             $data['created_at'] = Carbon::now()->format('Y-m-d H:i:s');
             $data['updated_at'] = Carbon::now()->format('Y-m-d H:i:s');
 
-            DB::table('languages')->insert($data);
+            DB::table($this->table)->insert($data);
             ++$orderPosition;
         }
     }

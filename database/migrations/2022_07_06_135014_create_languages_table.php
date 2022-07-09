@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->string('locale')->comment('Locale');
             $table->string('name')->comment('Name');
+            $table->string('native')->comment('Native name');
             $table->string('regional')->comment('Regional');
             $table->tinyInteger('active')->default(1)->comment('Enable status');
             $table->tinyInteger('default')->default(0)->comment('Default status');

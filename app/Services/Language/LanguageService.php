@@ -57,6 +57,7 @@ final class LanguageService implements LanguageServiceContract
             $supportedLocales = self::makeSupportedLocales($locales);
             $languages->map(function ($lang) use (&$supportedLocales) {
                 $supportedLocales[$lang->locale]['name'] = $lang->name;
+                $supportedLocales[$lang->locale]['native'] = $lang->native;
                 $supportedLocales[$lang->locale]['regional'] = $lang->regional;
             });
         }
