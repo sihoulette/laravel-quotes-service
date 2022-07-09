@@ -1,0 +1,6 @@
+{
+    "layout.dropdown.login": "Login",
+    "layout.dropdown.register": "Register",
+    "layout.dropdown.posts": "Your quotes",
+    "layout.dropdown.logout": "Log out"
+}

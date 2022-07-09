@@ -1,0 +1,37 @@
+{
+    "layout.dropdown.login": "Войти",
+    "layout.dropdown.register": "Регистрация",
+    "layout.dropdown.posts": "Ваши цитаты",
+    "layout.dropdown.logout": "Выйти",
+
+    "home.title": "Главная страница",
+
+    "auth.login.title": "Войти",
+    "auth.login.welcome": "Добро пожаловать",
+    "auth.login.description": "Вы можете войти с помощью электронной почты",
+    "auth.login.errors.title": "Пожалуйста, исправьте ошибки!",
+    "auth.login.label.email": "Email",
+    "auth.login.placeholder.email": "Введите Ваш email...",
+    "auth.login.label.password": "Пароль",
+    "auth.login.placeholder.password": "Введите Ваш пароль...",
+    "auth.login.label.remember":  "Запомнить меня",
+    "auth.login.link.register": "Регистрация",
+    "auth.login.btn.submit": "Войти",
+
+    "auth.register.title": "Регистрация",
+    "auth.register.welcome": "Создать учетную запись",
+    "auth.register.description": "Пожалуйста, заполните следующие поля соответствующей информацией, чтобы зарегистрировать новую учетную запись.",
+    "auth.register.errors.title": "Пожалуйста, исправьте ошибки!",
+    "auth.register.label.name": "Имя",
+    "auth.register.placeholder.name": "Введите Ваше имя...",
+    "auth.register.label.email": "Email",
+    "auth.register.placeholder.email": "Введите Ваш email...",
+    "auth.register.label.password": "Пароль",
+    "auth.register.placeholder.password": "Введите Ваш пароль...",
+    "auth.register.label.passwordConfirm": "Повторить пароль",
+    "auth.register.placeholder.passwordConfirm": "Повторите Ваш пароль...",
+    "auth.register.link.login": "Войти",
+    "auth.register.btn.submit": "Регистрация",
+
+    "requests.register.name": "Имя"
+}

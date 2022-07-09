@@ -127,6 +127,9 @@ return [
             // 'TwigBridge\Extension\Laravel\Form',
             // 'TwigBridge\Extension\Laravel\Html',
             // 'TwigBridge\Extension\Laravel\Legacy\Facades',
+
+            // ... other enabled extensions ...
+            \App\Twig\Functions::class,
         ],
 
         /*
@@ -191,6 +194,7 @@ return [
             'head',
             'last',
             'mix',
+            'dd',
         ],
 
         /*

@@ -1,0 +1,65 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="flex-shrink-0 dropdown language">
+                <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownLang" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-earth-europe fa-2x"></i>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownLang" style="">
+                    {% for localeCode, item in i18nSwitchList() %}
+                        <li>
+                            <a class="dropdown-item" rel="alternate" hreflang="{{ localeCode }}" href="{{ item.link }}">
+                                {{ item.native }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
+            <div class="flex-shrink-0 dropdown user">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser" style="">
+                    {% if auth_check() %}
+                        {% if routeHas('post') %}
+                            <li>
+                                <a class="dropdown-item" href="{{ route('post') }}">
+                                    {{ trans('layout.dropdown.posts') }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if routeHas('logout') %}
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ trans('layout.dropdown.logout') }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        {% if routeHas('login') %}
+                            <li>
+                                <a class="dropdown-item" href="{{ route('login') }}">
+                                    {{ trans('layout.dropdown.login') }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if routeHas('register') %}
+                            <li>
+                                <a class="dropdown-item" href="{{ route('register') }}">
+                                    {{ trans('layout.dropdown.register') }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+                {% if routeHas('logout') %}
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>
