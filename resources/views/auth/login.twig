@@ -1,0 +1,67 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('auth.login.title') }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row vh-100 py-4 justify-content-center align-items-center">
+            <form class="col-lg-4 card py-4" action="{{ route('login') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <div class="card-header border-bottom-0 bg-white text-center">
+                    <h3 class="fs-3">{{ trans('auth.login.welcome') }}</h3>
+                    <span>{{ trans('auth.login.description') }}</span>
+                </div>
+                <div class="card-body">
+                    {% if errors.any %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{ trans('auth.login.errors.title') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                            <div class="py-2">
+                                {% for error in errors.all %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <label for="email" class="form-label">{{ trans('auth.login.label.email') }}</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="email-addon">
+                            <i class="fa-solid fa-at"></i>
+                        </span>
+                        <input id="email" type="email" name="email" class="form-control" value="{{ old('email') }}"
+                               placeholder="{{ trans('auth.login.placeholder.email') }}" aria-label="email" aria-describedby="email-addon">
+                    </div>
+
+                    <label for="password" class="form-label">{{ trans('auth.login.label.password') }}</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="password-addon">
+                            <i class="fa-solid fa-key"></i>
+                        </span>
+                        <input id="password" type="password" name="password" class="form-control"
+                               placeholder="{{ trans('auth.login.placeholder.password') }}" aria-label="password" aria-describedby="password-addon">
+                    </div>
+
+                    <div class="form-check">
+                        <input id="remember" class="form-check-input" type="checkbox"
+                               name="remember" {% if old('remember') %}checked{% endif %}>
+                        <label class="form-check-label" for="remember">
+                            {{ trans('auth.login.label.remember') }}
+                        </label>
+                    </div>
+
+                    <div class="d-flex justify-content-around pt-4">
+                        {% if routeHas('register') %}
+                            <a class="btn btn-outline-primary px-4" href="{{ route('register') }}">
+                                {{ trans('auth.login.link.register') }}
+                            </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-success px-4">
+                            {{ trans('auth.login.btn.submit') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

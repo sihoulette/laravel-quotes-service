@@ -1,0 +1,84 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('auth.register.title') }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row vh-100 py-4 justify-content-center align-items-center">
+            <form class="col-lg-4 card py-4" action="{{ route('register') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <div class="card-header border-bottom-0 bg-white text-center">
+                    <h3 class="fs-3">{{ trans('auth.register.welcome') }}</h3>
+                    <span>{{ trans('auth.register.description') }}</span>
+                </div>
+                <div class="card-body">
+                    {% if errors.any %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{ trans('auth.register.errors.title') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                            <div class="py-2">
+                                {% for error in errors.all %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <label for="name" class="form-label">{{ trans('auth.register.label.name') }}</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="name-addon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input id="name" type="text" name="name" class="form-control" value="{{ old('name') }}"
+                               placeholder="{{ trans('auth.register.placeholder.name') }}" aria-label="name" aria-describedby="name-addon">
+                    </div>
+
+                    <label for="email" class="form-label">{{ trans('auth.register.label.email') }}</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="email-addon">
+                            <i class="fa-solid fa-at"></i>
+                        </span>
+                        <input id="email" type="email" name="email" class="form-control" value="{{ old('email') }}"
+                               placeholder="{{ trans('auth.register.placeholder.email') }}" aria-label="email" aria-describedby="email-addon">
+                    </div>
+
+                    <label for="password" class="form-label">{{ trans('auth.register.label.password') }}</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="password-addon">
+                            <i class="fa-solid fa-key"></i>
+                        </span>
+                        <input id="password" type="password" name="password" class="form-control"
+                               placeholder="{{ trans('auth.register.placeholder.password') }}" aria-label="password" aria-describedby="password-addon">
+                    </div>
+
+                    <label for="password_confirmation" class="form-label">{{ trans('auth.register.label.passwordConfirm') }}</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="password-conf-addon">
+                            <i class="fa-solid fa-key"></i>
+                        </span>
+                        <input id="password_confirmation" type="password" name="password_confirmation" class="form-control"
+                               placeholder="{{ trans('auth.register.placeholder.passwordConfirm') }}" aria-label="password_confirmation" aria-describedby="password-conf-addon">
+                    </div>
+
+                    <div class="form-check">
+                        <input id="acceptRules" class="form-check-input" type="checkbox"
+                               name="accept_rules" {% if old('accept_rules') %}checked{% endif %}>
+                        <label class="form-check-label" for="acceptRules">
+                            {{ trans('auth.register.label.acceptRules') }}
+                        </label>
+                    </div>
+                    <div class="d-flex justify-content-around pt-4">
+                        {% if routeHas('login') %}
+                            <a class="btn btn-outline-primary px-4" href="{{ route('login') }}">
+                                {{ trans('auth.register.link.login') }}
+                            </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-success px-4">
+                            {{ trans('auth.register.btn.submit') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
