@@ -23,8 +23,7 @@ class HomeService
      */
     public function index(array $data = []): LengthAwarePaginator
     {
-        return Post::where('user_id', Auth::user()->id)
-            ->where('language_locale', LaravelLocalization::getCurrentLocale())
+        return Post::where('language_locale', LaravelLocalization::getCurrentLocale())
             ->with(['user'])
             ->orderByDesc('id')
             ->paginate(5);
