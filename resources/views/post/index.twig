@@ -1,0 +1,72 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.post.title') }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-2">
+                <li class="breadcrumb-item">
+                    <a href="{{ localizeURL('/') }}">{{ trans('pages.home.title') }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ trans('pages.post.title') }}</li>
+            </ol>
+        </nav>
+
+        {% if session_has('resp.msg') %}
+            <div class="alert {% if session_get('resp.success') %}alert-success{% else %}alert-danger{% endif %}
+            alert-dismissible fade show" role="alert">
+                {{ session_get('resp.msg') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+        <div class="card">
+            <div class="card-header text-end">
+                <a class="btn btn-success" href="{{ route('post.create') }}">{{ trans('pages.link.create') }}</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ trans('pages.post.label.quote') }}</th>
+                        <th scope="col">{{ trans('pages.post.label.moderated') }}</th>
+                        <th scope="col">{{ trans('pages.post.label.created') }}</th>
+                        <th scope="col">{{ trans('pages.post.label.updated') }}</th>
+                        <th scope="col">{{ trans('pages.grid.label.actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.content|raw }}</td>
+                        <td>{{ item.moderated_at }}</td>
+                        <td>{{ item.created_at }}</td>
+                        <td>{{ item.updated_at }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="actions-{{ item.id }}"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ trans('pages.grid.label.actions') }}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="actions-{{ item.id }}">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('post.edit', item.id) }}">
+                                            {{ trans('pages.grid.label.edit') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">{{ trans('pages.grid.empty') }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
