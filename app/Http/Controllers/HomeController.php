@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Services\Home\HomeService;
 use Illuminate\Contracts\Support\Renderable;
 
 /**
@@ -12,12 +14,27 @@ use Illuminate\Contracts\Support\Renderable;
 final class HomeController extends Controller
 {
     /**
+     * @var HomeService $service
+     */
+    public HomeService $service;
+
+    /**
+     * @param HomeService $service
+     */
+    public function __construct(HomeService $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
      * @return Renderable
      *
      * @author sihoullete
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $data['items'] = $this->service->index($request->all());
+
+        return view('home', $data);
     }
 }

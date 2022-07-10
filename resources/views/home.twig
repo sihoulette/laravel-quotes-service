@@ -2,5 +2,22 @@
 {% block title %}{{ trans('pages.home.title') }}{% endblock %}
 
 {% block content %}
-
+    <div class="container-fluid">
+        {% for item in items %}
+            <div class="card my-3">
+                <div class="card-body">
+                    {{ item.content|raw }}
+                </div>
+                <div class="card-footer">
+                    <div class="fw-bolder">
+                        {{ trans('pages.home.author', {author: item.user.email}) }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="text-center fs-4 my-3">
+                {{ trans('pages.grid.empty') }}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
