@@ -1,10 +1,8 @@
 {
     "layout.dropdown.login": "Войти",
     "layout.dropdown.register": "Регистрация",
-    "layout.dropdown.posts": "Ваши цитаты",
+    "layout.dropdown.posts": "Цитаты",
     "layout.dropdown.logout": "Выйти",
-
-    "home.title": "Главная страница",
 
     "auth.login.title": "Войти",
     "auth.login.welcome": "Добро пожаловать",
@@ -30,8 +28,28 @@
     "auth.register.placeholder.password": "Введите Ваш пароль...",
     "auth.register.label.passwordConfirm": "Повторить пароль",
     "auth.register.placeholder.passwordConfirm": "Повторите Ваш пароль...",
+    "auth.register.label.acceptRules":  "Принять условия использования",
     "auth.register.link.login": "Войти",
     "auth.register.btn.submit": "Регистрация",
+    "requests.register.name": "Имя",
 
-    "requests.register.name": "Имя"
+    "services.save.error": "Ошибка сохранения",
+    "services.save.success": "Сохранено успешно",
+
+    "pages.link.create": "Добавить",
+    "pages.form.errors.title": "Пожалуйста, исправьте ошибки!",
+    "pages.form.save.submit": "Сохранить",
+    "pages.create.title": "Добавить",
+    "pages.update.title": "Редактировать",
+    "pages.grid.empty": "Записей не найдено",
+    "pages.grid.label.actions": "Действия",
+    "pages.grid.label.edit": "Редактировать",
+
+    "pages.home.title": "Главная страница",
+
+    "pages.post.title": "Цитаты",
+    "pages.post.label.quote": "Цитата",
+    "pages.post.label.moderated": "Прошла модерацию",
+    "pages.post.label.created": "Добавлена",
+    "pages.post.label.updated": "Изменена"
 }

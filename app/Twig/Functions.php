@@ -23,22 +23,10 @@ class Functions extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('routeHas', [$this, 'routeHas']),
+            new TwigFunction('routeHas', [Route::class, 'has']),
             new TwigFunction('i18nSwitchList', [$this, 'i18nSwitchList']),
+            new TwigFunction('localizeURL', [LaravelLocalization::class, 'localizeURL']),
         ];
-    }
-
-    /**
-     * Check if a route with the given name exists.
-     *
-     * @param array|string $name
-     * @return bool
-     *
-     * @author sihoullete
-     */
-    public static function routeHas(array|string $name): bool
-    {
-        return Route::has($name);
     }
 
     /**

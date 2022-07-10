@@ -14,6 +14,6 @@ return [
 
     'dropdown.login' => 'Login',
     'dropdown.register' => 'Register',
-    'dropdown.posts' => 'Your quotes',
+    'dropdown.posts' => 'Quotes',
     'dropdown.logout' => 'Log out',
 ];

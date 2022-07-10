@@ -15,16 +15,16 @@
                     {% endfor %}
                 </ul>
             </div>
-            <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
+            <a class="navbar-brand" href="{{ localizeURL('/') }}">{{ config('app.name') }}</a>
             <div class="flex-shrink-0 dropdown user">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser" style="">
                     {% if auth_check() %}
-                        {% if routeHas('post') %}
+                        {% if routeHas('post.index') %}
                             <li>
-                                <a class="dropdown-item" href="{{ route('post') }}">
+                                <a class="dropdown-item" href="{{ route('post.index') }}">
                                     {{ trans('layout.dropdown.posts') }}
                                 </a>
                             </li>
