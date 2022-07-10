@@ -24,6 +24,7 @@ return [
 
     # Home page
     'home.title' => 'Home',
+    'home.author' => 'Author: :author',
 
     # User quotes page
     'post.title' => 'Quotes',

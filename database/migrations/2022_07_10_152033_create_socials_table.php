@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('languages', function (Blueprint $table) {
-            $table->string('locale')->comment('Locale');
-            $table->string('name')->comment('Name');
-            $table->string('native')->comment('Native name');
-            $table->string('regional')->comment('Regional');
+        Schema::create('socials', function (Blueprint $table) {
+            $table->string('alias')->unique()->comment('Api alias');
+            $table->string('name')->unique()->comment('Name');
+            $table->string('fa_brand')->unique()->comment('Fontawesome icon');
             $table->tinyInteger('active')->default(1)->comment('Enable status');
-            $table->tinyInteger('default')->default(0)->comment('Default status');
             $table->smallInteger('position')->default(0)->comment('Order position');
             $table->timestamps();
 
-            $table->primary('locale');
+            $table->primary('alias');
         });
     }
 
@@ -34,7 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
-        Schema::dropIfExists('languages');
+        Schema::dropIfExists('socials');
     }
 };
