@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id', false, true)->comment('Author ID');
             $table->string('language_locale')->comment('Lang locale');
-            $table->text('content')->unique()->comment('Quote content');
+            $table->text('content')->comment('Quote content');
             $table->timestamp('moderated_at')->nullable()->comment('Moderated');
             $table->timestamps();
             $table->softDeletes();
