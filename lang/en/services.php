@@ -14,4 +14,7 @@ return [
 
     'save.error' => 'Save error',
     'save.success' => 'Saved successfully',
+
+    'post.share.success' => 'Quote sent success',
+    'post.share.error' => 'Error, pleas try again later'
 ];

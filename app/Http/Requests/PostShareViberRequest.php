@@ -19,7 +19,7 @@ final class PostShareViberRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->ajax();
     }
 
     /**
@@ -43,8 +43,34 @@ final class PostShareViberRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'social_alias' => 'required|string|exists:socials,alias',
             'post_id' => 'required|exists:posts,id,language_locale,' . $this->get('language_locale'),
             'data' => 'required|regex:/^([0-9\s\+\(\)]*)$/|min:10',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return [
+            'data' => trans('requests.share.viber'),
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'data.regex' => trans('requests.fail.phone'),
+            'data.min' => trans('requests.fail.phone'),
         ];
     }
 }
