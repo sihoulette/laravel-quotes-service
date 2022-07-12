@@ -25,6 +25,8 @@ return [
     # Home page
     'home.title' => 'Home',
     'home.author' => 'Author: :author',
+    'home.form.share.title' => 'Share quote',
+    'home.form.share.submit' => 'Submit',
 
     # User quotes page
     'post.title' => 'Quotes',

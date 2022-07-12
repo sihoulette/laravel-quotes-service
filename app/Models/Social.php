@@ -3,25 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Post
+ * Class Social
  *
  * @package App\Models
  */
-class Post extends Model
+class Social extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     /**
      * The table associated with the model.
      *
      * @var string $table
      */
-    protected $table = 'posts';
+    protected $table = 'socials';
 
     /**
      * The attributes that are mass assignable.
@@ -29,10 +27,11 @@ class Post extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'language_locale',
-        'content',
-        'moderated_at'
+        'alias',
+        'name',
+        'fa_brand',
+        'active',
+        'position',
     ];
 
     /**
@@ -44,16 +43,4 @@ class Post extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    /**
-     * Get the user associated with the post.
-     *
-     * @return HasOne
-     *
-     * @author sihoullete
-     */
-    public function user(): HasOne
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
-    }
 }

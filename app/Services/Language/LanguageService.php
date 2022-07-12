@@ -5,13 +5,14 @@ namespace App\Services\Language;
 use RuntimeException;
 use App\Models\Language;
 use Illuminate\Support\Arr;
+use App\Services\AbstractService;
 
 /**
  * Class LanguageService
  *
  * @package App\Services\Language
  */
-final class LanguageService implements LanguageServiceContract
+final class LanguageService extends AbstractService implements LanguageServiceContract
 {
     /**
      * @param array $locales

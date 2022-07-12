@@ -42,4 +42,14 @@ Route::group([
     Route::middleware('auth')->group(function () {
         Route::resource('post', Controllers\PostController::class);
     });
+
+    # Post share routes
+    Route::group(['prefix' => 'share', 'as'=>'share.'], function () {
+        Route::post('telegram', [Controllers\PostShareController::class, 'telegram'])
+            ->name('telegram');
+        Route::post('viber', [Controllers\PostShareController::class, 'viber'])
+            ->name('viber');
+        Route::post('email', [Controllers\PostShareController::class, 'email'])
+            ->name('e-mail');
+    });
 });

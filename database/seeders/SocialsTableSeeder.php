@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Services\Social\SocialServiceContract;
 
 /**
  * Class SocialsTableSeeder
@@ -21,24 +22,7 @@ final class SocialsTableSeeder extends Seeder
     /**
      * @var array $socials
      */
-    private array $socials = [
-        [
-            'alias' => 'telegram',
-            'name' => 'Telegram',
-            'fa_brand' => 'fa-brands fa-telegram',
-        ],
-        [
-            'alias' => 'e-mail',
-            'name' => 'E-mail',
-            'fa_brand' => 'fa-solid fa-at',
-
-        ],
-        [
-            'alias' => 'viber',
-            'name' => 'Viber',
-            'fa_brand' => 'fa-brands fa-viber',
-        ]
-    ];
+    private array $socials = SocialServiceContract::SUPPORT_NETWORKS;
 
     /**
      * Run the database seeds.
