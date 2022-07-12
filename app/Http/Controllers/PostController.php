@@ -8,7 +8,6 @@ use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
 
 /**
  * Class PostController
@@ -61,8 +60,8 @@ final class PostController extends Controller
      */
     public function store(PostCreateRequest $request)
     {
-        $request->validated();
-        $resp = $this->service->create($request->all());
+        $data = $request->validated();
+        $resp = $this->service->create($data);
 
         return $resp['success']
             ? redirect()->route('post.index')->with(['resp' => $resp])
@@ -107,8 +106,8 @@ final class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, int $id)
     {
-        $request->validated();
-        $resp = $this->service->update($id, $request->all());
+        $data = $request->validated();
+        $resp = $this->service->update($id, $data);
 
         return $resp['success']
             ? redirect()->route('post.index')->with(['resp' => $resp])

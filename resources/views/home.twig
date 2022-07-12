@@ -9,8 +9,32 @@
                     {{ item.content|raw }}
                 </div>
                 <div class="card-footer">
-                    <div class="fw-bolder">
-                        {{ trans('pages.home.author', {author: item.user.email}) }}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="fw-bolder">
+                            {{ trans('pages.home.author', {author: item.user.email}) }}
+                        </div>
+                        {% if item.socials is not empty %}
+                            <div class="fw-bolder">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    {% for social in item.socials %}
+                                        <a id="share-btn-{{ item.id }}"
+                                           href="#"
+                                           class="btn btn-outline-primary"
+                                           role="button"
+                                           data-e="shareSocial"
+                                           data-id="{{ item.id }}"
+                                           data-name="{{ social.name }}"
+                                           data-url="{{ social.share_url }}">
+                                            <i class="{{ social.fa_brand }}"></i>
+                                            <span>{{ social.name }}</span>
+                                            <span class="badge bg-secondary">
+                                                {{ social.share_count }}
+                                            </span>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -19,5 +43,40 @@
                 {{ trans('pages.grid.empty') }}
             </div>
         {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="modal fade" id="sharePost" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="sharePostLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sharePostLabel">
+                        {{ trans('pages.home.form.share.title') }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="sharePostForm" action="/" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="post_id" value="">
+
+                        <div class="mb-3">
+                            <label for="data" class="form-label">Data</label>
+                            <div class="input-group has-validation">
+                                <input id="data" type="text" name="data" class="form-control">
+                                <div class="invalid-feedback">Oops...</div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary px-4">
+                                {{ trans('pages.home.form.share.submit') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
