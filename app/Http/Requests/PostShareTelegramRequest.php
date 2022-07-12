@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ShareTelegramRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -19,7 +20,7 @@ final class PostShareTelegramRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->ajax();
     }
 
     /**
@@ -43,8 +44,21 @@ final class PostShareTelegramRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'social_alias' => 'required|string|exists:socials,alias',
             'post_id' => 'required|exists:posts,id,language_locale,' . $this->get('language_locale'),
-            'data' => 'required|regex:/^([0-9\s\+\(\)]*)$/|min:10',
+            'data' => ['required', 'string', new ShareTelegramRule],
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return [
+            'data' => trans('requests.share.telegram'),
         ];
     }
 }

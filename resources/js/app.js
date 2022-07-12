@@ -1,4 +1,5 @@
 import './bootstrap';
+import jBox from "jbox";
 
 const sharePost = {
     modalID: 'sharePost',
@@ -18,11 +19,7 @@ const sharePost = {
                 if (typeof options.label === 'string') {
                     modalEl.find('label[for="data"]').text(options.label);
                 }
-                const shareModal = new bs.Modal(modalEl[0])
-                $(modalEl).on('hidden.bs.modal', (e) => {
-                    modalEl.find('input[name="data"]').val('');
-                    modalEl.find('input[name="post_id"]').val('');
-                });
+                const shareModal = new bs.Modal(modalEl[0]);
                 shareModal.show();
             } else {
                 throw new Error('Attribute [data-url] must be set...');
@@ -39,9 +36,11 @@ const sharePost = {
         const modalEl = $(document).find('#' + sharePost.modalID);
         if (modalEl.length > 0) {
             modalEl.find('form').attr('action', '/');
-            modalEl.find('input[name="data"]').val('');
             modalEl.find('input[name="post_id"]').val('');
-            modalEl.find('.alert').addClass('d-none');
+
+            const dataInput = modalEl.find('input[name="data"]');
+            dataInput.removeClass('is-invalid');
+            dataInput.val('');
         } else {
             throw new Error('Modal element not found...');
         }
@@ -53,17 +52,38 @@ const sharePost = {
     submitForm: () => {
         const formEl = $(document).find('#' + sharePost.formID);
         if (typeof formEl === 'object' && formEl.length > 0) {
+            const formData = new FormData(formEl[0]);
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: formEl.attr('action'),
-                data: new FormData(formEl[0]),
+                data: formData,
                 processData: false,
                 contentType: false,
                 cache: false,
                 timeout: false,
                 success: function (r) {
-
+                    if (r.success) {
+                        const modalEl = formEl.closest('.modal');
+                        if (modalEl.length > 0) {
+                            $(modalEl).find('.btn-close').trigger('click');
+                        }
+                        /** @var r.share_count */
+                        if (typeof r.share_count !== 'undefined') {
+                            const shareBtnEl = $('#share-btn-' + formData.get('post_id'));
+                            if (shareBtnEl.length > 0) {
+                                shareBtnEl.find('.badge').text(r.share_count);
+                            }
+                        }
+                    }
+                    /** @var r.msg */
+                    if (typeof r.msg === 'string' && r.msg.length > 0) {
+                        new jBox('Notice', {
+                            content: r.msg,
+                            color: r.success ? 'green' : 'red',
+                            autoClose: 1500
+                        });
+                    }
                 },
                 error: function (r) {
                     /** @var r.responseJSON {{}} */
@@ -82,6 +102,13 @@ const sharePost = {
                                 msgBoxEl.html(errorsHtml);
                             }
                             inputEl.addClass('is-invalid')
+                        }
+                        if (typeof r.responseJSON.message === 'string') {
+                            new jBox('Notice', {
+                                content: r.responseJSON.message,
+                                color: 'red',
+                                autoClose: 1500
+                            });
                         }
                     }
                 }
@@ -106,6 +133,14 @@ $(document).ready(() => {
     $(document).on('submit', '#' + sharePost.formID, (e) => {
         e.preventDefault();
         sharePost.submitForm();
+    });
+
+    // Clean input error on change
+    $(document).on('change', 'input[name="data"]', (e) => {
+        const dataInput = $(e.currentTarget);
+        if (dataInput.length > 0) {
+            dataInput.removeClass('is-invalid');
+        }
     });
 
     // Refresh share modal
