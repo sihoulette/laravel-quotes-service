@@ -10,7 +10,6 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "mcamara/laravel-localization": "^1.7",
         "rcrowe/twigbridge": "^0.14.0"
     },
     "require-dev": {
