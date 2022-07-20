@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Rules\ShareTelegramRule;
+use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Http\FormRequest;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class PostShareTelegramRequest
@@ -32,7 +32,7 @@ final class PostShareTelegramRequest extends FormRequest
     {
         $this->merge([
             'social_alias' => 'telegram',
-            'language_locale' => LaravelLocalization::getCurrentLocale(),
+            'language_locale' => App::getLocale(),
         ]);
     }
 

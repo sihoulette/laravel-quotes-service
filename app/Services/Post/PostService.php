@@ -6,10 +6,10 @@ use Exception;
 use Carbon\Carbon;
 use App\Models\Post;
 use App\Services\AbstractService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class PostService
@@ -28,7 +28,7 @@ final class PostService extends AbstractService
     public function index(array $data = []): LengthAwarePaginator
     {
         return Post::where('user_id', Auth::user()->id)
-            ->where('language_locale', LaravelLocalization::getCurrentLocale())
+            ->where('language_locale', App::getLocale())
             ->paginate(5);
     }
 
@@ -102,7 +102,7 @@ final class PostService extends AbstractService
     {
         return Post::where('id', $id)
             ->where('user_id', Auth::user()->id)
-            ->where('language_locale', LaravelLocalization::getCurrentLocale())
+            ->where('language_locale', App::getLocale())
             ->first();
     }
 }

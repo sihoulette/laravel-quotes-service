@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Http\FormRequest;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class PostCreateRequest
@@ -31,7 +31,7 @@ final class PostCreateRequest extends FormRequest
     {
         $this->merge([
             'user_id' => $this->user()->id,
-            'language_locale' => LaravelLocalization::getCurrentLocale(),
+            'language_locale' => App::getLocale(),
         ]);
     }
 
