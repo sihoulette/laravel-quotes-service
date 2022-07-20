@@ -99,6 +99,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Supported Locales
+    |--------------------------------------------------------------------------
+    */
+
+    'supported_locales' => [
+        'en',
+        'ru',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Faker Locale
     |--------------------------------------------------------------------------
     |
@@ -211,7 +222,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Twig' => 'TwigBridge\Facade\Twig',
+        'Localization' => App\Services\Localization\LocalizationService::class,
+        'Twig' => TwigBridge\Facade\Twig::class,
     ])->toArray(),
 
 ];

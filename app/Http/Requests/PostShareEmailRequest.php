@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Http\FormRequest;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class PostShareEmailRequest
@@ -31,7 +31,7 @@ final class PostShareEmailRequest extends FormRequest
     {
         $this->merge([
             'social_alias' => 'e-mail',
-            'language_locale' => LaravelLocalization::getCurrentLocale(),
+            'language_locale' => App::getLocale(),
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LocalizationHelper;
 use Illuminate\Http\Request;
 use App\Services\Home\HomeService;
 use Illuminate\Contracts\Support\Renderable;

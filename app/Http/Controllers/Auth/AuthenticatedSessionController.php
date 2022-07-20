@@ -9,7 +9,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Helpers\LocalizationHelper;
 
 /**
  * Class AuthenticatedSessionController
@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        return redirect()->intended(LaravelLocalization::localizeUrl(RouteServiceProvider::HOME));
+        return redirect()->intended(LocalizationHelper::localizeUrl(RouteServiceProvider::HOME));
     }
 
     /**
@@ -56,6 +56,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(LaravelLocalization::localizeUrl(RouteServiceProvider::HOME));
+        return redirect(LocalizationHelper::localizeUrl(RouteServiceProvider::HOME));
     }
 }

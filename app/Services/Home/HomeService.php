@@ -6,8 +6,8 @@ use App\Models\Post;
 use App\Models\PostSocial;
 use App\Services\Social\SocialService;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class HomeService
@@ -25,7 +25,7 @@ final class HomeService
      */
     public function index(array $data = []): LengthAwarePaginator
     {
-        $posts = Post::where('language_locale', LaravelLocalization::getCurrentLocale())
+        $posts = Post::where('language_locale', App::getLocale())
             ->with(['user'])
             ->orderByDesc('id')
             ->paginate(5);

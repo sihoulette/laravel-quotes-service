@@ -3,6 +3,7 @@
 use App\Http\Controllers;
 use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Facades\Localization\LocalizationFacade;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group([], function () {
+Route::group([
+    'prefix' => LocalizationFacade::langPrefix(),
+    'middleware' => 'localization'
+], function () {
     # Home route
     Route::get('/', [Controllers\HomeController::class, 'index']);
 

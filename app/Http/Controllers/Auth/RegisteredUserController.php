@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Helpers\LocalizationHelper;
 
 /**
  * Class RegisteredUserController
@@ -52,6 +52,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(LaravelLocalization::localizeUrl(RouteServiceProvider::HOME));
+        return redirect(LocalizationHelper::localizeUrl(RouteServiceProvider::HOME));
     }
 }

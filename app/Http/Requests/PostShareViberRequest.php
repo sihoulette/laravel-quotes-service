@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Http\FormRequest;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class PostShareTelegramRequest
@@ -31,7 +31,7 @@ final class PostShareViberRequest extends FormRequest
     {
         $this->merge([
             'social_alias' => 'viber',
-            'language_locale' => LaravelLocalization::getCurrentLocale(),
+            'language_locale' => App::getLocale(),
         ]);
     }
 
