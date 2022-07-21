@@ -24,8 +24,8 @@ final class UsersTableSeeder extends Seeder
      */
     private array $users = [
         [
-            'name' => 'dev',
-            'email' => 'aleksandr.bytsyk@gmail.com',
+            'name' => 'demo',
+            'email' => 'demo@gmail.com',
             'password' => 'password',
         ],
     ];

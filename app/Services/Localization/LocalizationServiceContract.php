@@ -10,6 +10,12 @@ namespace App\Services\Localization;
 interface LocalizationServiceContract
 {
     /**
+     * @return bool
+     * @author sihoullete
+     */
+    public function canLoadLanguages(): bool;
+
+    /**
      * @return void
      * @author sihoullete
      */
