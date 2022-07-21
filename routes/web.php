@@ -40,7 +40,9 @@ Route::group([
 
     # Post routes
     Route::middleware('auth')->group(function () {
-        Route::resource('post', Controllers\PostController::class);
+        Route::resource('post', Controllers\PostController::class)->except([
+            'show', 'destroy',
+        ]);
     });
 
     # Post share routes
