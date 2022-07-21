@@ -14,6 +14,10 @@ This project is the result of a test task. Please follow the installation instru
 - Build frontend assets ```npm run prod```
 - Create encryption keys & clients tokens ```php artisan passport:install```
 
+## Setup queue
+Don't forget to instruct your application to use the database driver by updating the QUEUE_CONNECTION variable in your application's .env file:
+>```QUEUE_CONNECTION=database```
+
 ## Demo access
 - Email: ```demo@gmail.com```
 - Password: ```password```
