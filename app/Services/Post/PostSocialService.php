@@ -63,6 +63,7 @@ final class PostSocialService extends AbstractService
             $model = $this->makeModel($data);
             $model->save();
             dispatch(new PostShareTelegramJob($model));
+            $resp['data'] = $model->getAttributes();
             $resp['share_count'] = $model->share_count;
             DB::commit();
         } catch (Exception $e) {
@@ -91,6 +92,7 @@ final class PostSocialService extends AbstractService
             $model = $this->makeModel($data);
             $model->save();
             dispatch(new PostShareViberJob($model));
+            $resp['data'] = $model->getAttributes();
             $resp['share_count'] = $model->share_count;
             DB::commit();
         } catch (Exception $e) {
@@ -119,6 +121,7 @@ final class PostSocialService extends AbstractService
             $model = $this->makeModel($data);
             $model->save();
             dispatch(new PostShareEmailJob($model));
+            $resp['data'] = $model->getAttributes();
             $resp['share_count'] = $model->share_count;
             DB::commit();
         } catch (Exception $e) {

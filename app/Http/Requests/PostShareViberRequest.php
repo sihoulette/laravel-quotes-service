@@ -19,7 +19,7 @@ final class PostShareViberRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->ajax();
+        return true;
     }
 
     /**

@@ -33,4 +33,14 @@ Route::group([
         # Post routes
         Route::resource('post', Api\PostController::class);
     });
+
+    # Post share routes
+    Route::group(['prefix' => 'share', 'as'=>'share.'], function () {
+        Route::post('telegram', [Api\PostShareController::class, 'telegram'])
+            ->name('telegram');
+        Route::post('viber', [Api\PostShareController::class, 'viber'])
+            ->name('viber');
+        Route::post('email', [Api\PostShareController::class, 'email'])
+            ->name('e-mail');
+    });
 });
