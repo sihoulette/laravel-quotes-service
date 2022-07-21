@@ -45,8 +45,8 @@ final class PostService extends AbstractService
             ->format('Y-m-d H:i:s');
         DB::beginTransaction();
         try {
-            Post::create($data);
             $resp['success'] = true;
+            $resp['data'] = Post::create($data);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
@@ -75,8 +75,9 @@ final class PostService extends AbstractService
         if ($model instanceof Post) {
             DB::beginTransaction();
             try {
-                $model->update($data);
                 $resp['success'] = true;
+                $model->update($data);
+                $resp['data'] = $model->getAttributes();
                 DB::commit();
             } catch (Exception $e) {
                 DB::rollBack();

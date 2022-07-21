@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts_socials', function (Blueprint $table) {
             $table->bigInteger('post_id', false, true)->comment('Post');
-            $table->string('social_alias')->unique()->comment('Api alias');
+            $table->string('social_alias')->comment('Api alias');
             $table->bigInteger('share_count', false, true)->comment('Share count');
             $table->timestamps();
 
