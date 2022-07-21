@@ -27,4 +27,10 @@ Route::group([
         ->name('register');
     Route::post('login', [Api\PassportAuthController::class, 'login'])
         ->name('login');
+
+    # Api authenticated routes
+    Route::middleware('auth:api')->group(function () {
+        # Post routes
+        Route::resource('post', Api\PostController::class);
+    });
 });
