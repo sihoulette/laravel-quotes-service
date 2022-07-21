@@ -3,6 +3,8 @@
 namespace App\Services\Localization;
 
 use App\Models\Language;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use App\Entities\Localization\LocalizationEntity;
 
 /**
@@ -25,8 +27,26 @@ final class LocalizationService implements LocalizationServiceContract
     public function __construct(LocalizationEntity $entity)
     {
         self::$entity = $entity;
-        $this->loadSupportedLanguages();
-        $this->loadDefaultLanguage();
+        if ($this->canLoadLanguages()) {
+            $this->loadSupportedLanguages();
+            $this->loadDefaultLanguage();
+        }
+    }
+
+    /**
+     * @return bool
+     * @author sihoullete
+     */
+    public function canLoadLanguages(): bool
+    {
+        try {
+            $aliveConnect = true;
+            DB::connection()->getPdo();
+        } catch (\Exception) {
+            $aliveConnect = false;
+        }
+
+        return $aliveConnect && Schema::hasTable('languages');
     }
 
     /**
