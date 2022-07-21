@@ -31,7 +31,9 @@ Route::group([
     # Api authenticated routes
     Route::middleware('auth:api')->group(function () {
         # Post routes
-        Route::resource('post', Api\PostController::class);
+        Route::resource('post', Api\PostController::class)->only([
+            'index', 'store', 'update'
+        ]);
     });
 
     # Post share routes
