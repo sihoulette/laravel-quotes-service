@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Facades\Localization\LocalizationFacade;
+use App\Http\Controllers\Api;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => LocalizationFacade::langPrefix(),
+    'middleware' => 'localization'
+], function () {
+    # Home route
+    Route::get('/', [Api\HomeController::class, 'index']);
 });
