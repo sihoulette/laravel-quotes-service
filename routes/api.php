@@ -21,4 +21,10 @@ Route::group([
 ], function () {
     # Home route
     Route::get('/', [Api\HomeController::class, 'index']);
+
+    # Auth routes
+    Route::put('register', [Api\PassportAuthController::class, 'register'])
+        ->name('register');
+    Route::post('login', [Api\PassportAuthController::class, 'login'])
+        ->name('login');
 });
