@@ -2,6 +2,7 @@ import './bootstrap';
 import jBox from "jbox";
 
 const sharePost = {
+    buttonEl: null,
     modalID: 'sharePost',
     formID: 'sharePostForm',
 
@@ -14,6 +15,9 @@ const sharePost = {
         const modalEl = $(document).find('#' + sharePost.modalID);
         if (modalEl.length > 0) {
             if (typeof options.url === 'string' && options.url.length > 0) {
+                if (typeof options.buttonEl === 'object' && options.buttonEl.length > 0) {
+                    sharePost.buttonEl = options.buttonEl;
+                }
                 modalEl.find('form').attr('action', options.url);
                 modalEl.find('input[name="post_id"]').val(options.id || '');
                 if (typeof options.label === 'string') {
@@ -35,6 +39,7 @@ const sharePost = {
     refreshModal: () => {
         const modalEl = $(document).find('#' + sharePost.modalID);
         if (modalEl.length > 0) {
+            sharePost.buttonEl = null;
             modalEl.find('form').attr('action', '/');
             modalEl.find('input[name="post_id"]').val('');
 
@@ -70,7 +75,7 @@ const sharePost = {
                         }
                         /** @var r.share_count */
                         if (typeof r.share_count !== 'undefined') {
-                            const shareBtnEl = $('#share-btn-' + formData.get('post_id'));
+                            const shareBtnEl = $(sharePost.buttonEl);
                             if (shareBtnEl.length > 0) {
                                 shareBtnEl.find('.badge').text(r.share_count);
                             }
@@ -122,6 +127,7 @@ $(document).ready(() => {
     $(document).on('click', '[data-e="shareSocial"]', (e) => {
         e.preventDefault();
         const that = $(e.currentTarget);
+        sharePost.buttonEl = that;
         sharePost.openModal({
             id: that.data('id'),
             url: that.data('url'),
