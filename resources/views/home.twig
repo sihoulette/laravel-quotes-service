@@ -16,8 +16,8 @@
                         {% if item.socials is not empty %}
                             <div class="fw-bolder">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    {% for social in item.socials %}
-                                        <a id="share-btn-{{ item.id }}"
+                                    {% for alias, social in item.socials %}
+                                        <a id="share-{{ alias }}-{{ item.id }}"
                                            href="#"
                                            class="btn btn-outline-primary"
                                            role="button"

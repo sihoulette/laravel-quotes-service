@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\PostSocial;
+use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -19,18 +19,24 @@ final class PostShareViberJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * @var int $postID
+     * @var int $postId
      */
-    public int $postID;
+    public int $postId;
+
+    /**
+     * @var string $contact
+     */
+    public string $contact;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param array $data
      */
-    public function __construct(PostSocial $model)
+    public function __construct(array $data = [])
     {
-        $this->postID = $model->post_id;
+        $this->postId = $data['postId'];
+        $this->contact = $data['contact'];
     }
 
     /**
@@ -40,7 +46,11 @@ final class PostShareViberJob implements ShouldQueue
      */
     public function handle()
     {
-        //@TODO Call API
-        sleep(rand(5, 20));
+        $model = Post::where('id', $this->postId)
+            ->first();
+        if ($model instanceof Post) {
+            //@TODO Call API
+            sleep(rand(5, 20));
+        }
     }
 }
