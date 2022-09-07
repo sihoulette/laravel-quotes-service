@@ -4,7 +4,7 @@
 This project is the result of a test task. Please follow the installation instructions
 
 ## Installation
-- Clone repository to project root ```git clone git@github.com:sihoulette/laravel.quotes.git .```
+- Clone repository to project root ```git clone git@github.com:sihoulette/laravel-quotes-service.git .```
 - Install composer dependencies ```composer install```
 - Configure you DB connection
 - Generate your application encryption key ```php artisan key:generate```
